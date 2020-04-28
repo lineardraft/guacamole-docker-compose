@@ -14,16 +14,16 @@
 #
 # - create a network 'guacnetwork_compose' with the 'bridge' driver.
 # - create a service 'guacd_compose' from 'guacamole/guacd' connected to 'guacnetwork'
-# - create a service 'postgres_guacamole_compose' (1) from 'postgres' connected to 'guacnetwork'
+# - create a service 'mysql_guacamole_compose' (1) from 'mysql' connected to 'guacnetwork'
 # - create a service 'guacamole_compose' (2)  from 'guacamole/guacamole/' conn. to 'guacnetwork'
 # - create a service 'nginx_guacamole_compose' (3) from 'nginx' connected to 'guacnetwork'
 #
 # (1)
 #  DB-Init script is in './init/initdb.sql' it has been created executing
-#  'docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgres > ./init/initdb.sql'
+#  'docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql > ./init/initdb.sql'
 #  once.
 #  DATA-DIR       is in './data'
-#  If you want to change the DB password change all lines with 'POSTGRES_PASSWORD:' and
+#  If you want to change the DB password change all lines with 'mysql_PASSWORD:' and
 #  change it to your needs before first start.
 #  To start from scratch delete './data' dir completely
 #  './data' will hold all data after first start!
@@ -38,7 +38,7 @@
 #  './data' will hold all data after first start!
 #
 # (2)
-#  Make sure you use the same value for 'POSTGRES_USER' and 'POSTGRES_PASSWORD'
+#  Make sure you use the same value for 'mysql_USER' and 'mysql_PASSWORD'
 #  as configured under (1)
 #
 # (3)
@@ -100,7 +100,7 @@ services:
     volumes:
     - ./drive:/drive:rw
     - ./record:/record:rw
-  # postgres
+  # mysql
   mysql:
     container_name: mysql_guacamole_compose
     environment:
