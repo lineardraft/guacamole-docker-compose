@@ -1,5 +1,21 @@
 ### BBB
 server {
+    listen 80 default_server;
+
+    server_name localhost;
+
+    location / {
+        return 301 https://$host$request_uri;
+        #rewrite ^ https://$host$request_uri? permanent;
+    }    
+
+    location ~ /.well-known/acme-challenge {
+        allow all;
+        root /data/letsencrypt;
+    }
+}
+
+server {
     listen       443 ssl http2;
     server_name  localhost;
 
