@@ -2,7 +2,7 @@
 #
 echo "Preparing folder init and creating ./init/initdb.sql"
 mkdir ./init >/dev/null 2>&1
-mkdir -p ./nginx/ssl >/dev/null 2>&1
+mkdir -p ./data/nginx/ssl >/dev/null 2>&1
 chmod -R +x ./init
 docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql > ./init/initdb.sql
 echo "done"
